@@ -1,7 +1,7 @@
 name: Update Current Version of Service
 
 on: 
-  workflow_call:
+  workflow_dispatch:
     inputs:
       service:
         type: string
