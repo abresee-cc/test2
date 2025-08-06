@@ -1,0 +1,46 @@
+name: Update Current Version of Service
+
+on: 
+  workflow_call:
+    inputs:
+      service:
+        type: string
+        required: true
+        description: the service whose version should be updated
+      version:
+        type: string
+        required: true
+        description: the version string to use
+      environment:
+        type: string
+        required: true
+        description: the environment to use
+
+jobs:
+  update-service-file:
+    name: Update the service file registered in clearcompany/service-deploy
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.228
+      with:
+        repository: clearcompany/service-deploy
+        token: ${{ secrets.SERVICE_DEPLOY_TOKEN }}
+        path: output
+        ref: main
+
+    - name: Configure git user
+      run: |
+        cd output
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+
+    - name: Update Service Version File
+      env: 
+        environment: ${{ inputs.environment }}
+      run: |
+        echo ${{ inputs.version }} > output/${{ env.environment }}/services/${{ inputs.service }}
+        deployed="${{inputs.service}}-${{inputs.version}}"
+        cd output
+        git add -A
+        git commit -m "push ${deployed}to ${{ env.environment }}."
+        git push

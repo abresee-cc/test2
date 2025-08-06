@@ -1,0 +1,33 @@
+on:
+  #workflow_call:
+  workflow_dispatch:
+    inputs:
+      service:
+        type: string
+        required: true
+        description: the service whose version should be updated
+      version:
+        type: string
+        required: true
+        description: the version string to use
+      environment:
+        # type: string
+        type: choice
+        required: true
+        description: the environment to use
+        # TODO: delete the options when making this back into a reusable workflow
+        options: 
+        - development
+        - staging
+        - performance
+        - production
+
+jobs:
+  dispatch-service-update:
+    name: Dispatch a request to the service-deploy repo to enqueue an update
+    runs-on: self-hosted
+    steps:
+    - uses: benc-uk/workflow-dispatch@e2e5e9a103e331dad343f381a29e654aea3cf8fc
+      with:
+        workflow: ./.github/workflows/update_deployed_service_file.yml
+        inputs: ${{toJson(inputs)}}
