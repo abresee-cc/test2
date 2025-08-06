@@ -22,5 +22,6 @@ jobs:
     steps:
     - uses: benc-uk/workflow-dispatch@e2e5e9a103e331dad343f381a29e654aea3cf8fc
       with:
-        workflow: abresee/test2/.github/workflows/update_deployed_service_file.yml
+        workflow: update_deployed_service_file.yml
+        repo: abresee-cc/test2
         inputs: ${{toJson(inputs)}}
