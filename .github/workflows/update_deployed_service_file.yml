@@ -16,6 +16,10 @@ on:
         required: true
         description: the environment to use
 
+concurrency: 
+  group: ${{ github.workflow_ref }}
+  cancel-in-progress: false
+
 jobs:
   update-service-file:
     name: Update the service file registered in clearcompany/service-deploy
