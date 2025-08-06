@@ -39,5 +39,5 @@ jobs:
         deployed="${{inputs.service}}-${{inputs.version}}"
         cd output
         git add -A
-        git commit -m "push ${deployed}to ${{ env.environment }}."
+        git commit -m "push ${deployed} to ${{ env.environment }}."
         git push
