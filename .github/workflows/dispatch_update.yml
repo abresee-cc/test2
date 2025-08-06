@@ -1,3 +1,4 @@
+name: Dispatch an update to the `service-deploy` repo
 on:
   #workflow_call:
   workflow_dispatch:
