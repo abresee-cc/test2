@@ -1,4 +1,4 @@
-name: Dispatch an update to the `service-deploy` repo
+name: Dispatch an update
 on:
   workflow_call:
     inputs:
@@ -22,5 +22,5 @@ jobs:
     steps:
     - uses: benc-uk/workflow-dispatch@e2e5e9a103e331dad343f381a29e654aea3cf8fc
       with:
-        workflow: update_deployed_service_file.yml
+        workflow: abresee/test2/.github/workflows/update_deployed_service_file.yml
         inputs: ${{toJson(inputs)}}
