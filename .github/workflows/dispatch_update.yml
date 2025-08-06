@@ -1,7 +1,6 @@
 name: Dispatch an update to the `service-deploy` repo
 on:
-  #workflow_call:
-  workflow_dispatch:
+  workflow_call:
     inputs:
       service:
         type: string
@@ -12,16 +11,9 @@ on:
         required: true
         description: the version string to use
       environment:
-        # type: string
-        type: choice
+        type: string
         required: true
         description: the environment to use
-        # TODO: delete the options when making this back into a reusable workflow
-        options: 
-        - development
-        - staging
-        - performance
-        - production
 
 jobs:
   dispatch-service-update:
