@@ -12,9 +12,14 @@ on:
         required: true
         description: the version string to use
       environment:
-        type: string
+        type: choice
         required: true
         description: the environment to use
+        options:
+        - development
+        - staging
+        - performance
+        - production
 
 concurrency: 
   group: ${{ github.workflow_ref }}
